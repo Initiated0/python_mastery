@@ -1,0 +1,122 @@
+****************************create conda environment*********************************
+https://login002.rc.sc.edu
+nvidia-smi -> to see gpus
+
+
+**********************************bashrc---------------------------------------------
+
+From a login or other node on the cluster, type nano ~/. bashrc to open the file in the 
+nano editor. My . bashrc has already been added to, so you'll see additional definitions 
+below the # User specific aliases and functions section.
+
+*****************************create a folder>use************************************* 
+source create --prefix=/work/nayeem/ENV/[nameOftheENV]
+
+*****************************activate it with:
+source actvate [path] /work/nayeem/ENV/[nameOftheENV]
+
+**********************************Joinin info*****************************************
+ssh -p222 nayeem@login.rci.sc.edu
+cd /work/revathy-lab/food-volume/nayeem [for lab work]
+cd /work/nayeem [for personal use]
+
+
+****************************************GitHub****************************************
+git clone the repo there > copy basic.sh with cp there > change python scirpt name > sava and exit > submit job using "sbatch basic.sh" >
+check squeue -u nayeem>
+**************************************************************************************
+
+
+conda deactivate
+
+module load python3/anaconda/2021.11
+
+module load cuda/11.3
+
+source activate /work/nayeem/ENV/tensor_env
+
+
+*****************************************
+cd /work/nayeem
+cd /work/revathy-lab/
+
+sinfo
+
+Lets you edit the GPU program
+nano gpu.sh
+CTRL x - to exit
+CTRL o - to rename 
+
+#SBATCH --gres=gpu:1
+#SBATCH -p v100-32gb-hiprio
+
+see jobs in queue
+squeue -u nayeem
+
+
+scancel [jobid]
+
+sbatch gpu.sh // submitting a job
+
+nano jobid.out // to see output
+
+*********************checking the GPU usage*********************************************
+ssh <nodeName>
+ssh node382
+
+nvidia-smi
+
+
+conda environment installed -> ask for setting up the conda env
+ask for git hub control
+copy from base 
+cp ../gpu.sh .
+
+
+push
+scp -P222 filename username@login.rci.sc.edu:/work/nayeem/destiantion
+scp -r foldername restsame 
+
+pull
+scp -P222 nayeem@login.rci.sc.edu:/work/revathy-lab/food-volume/data/checkpoints .
+
+[Pull entire folder]
+scp -r -P222 nayeem@login.rci.sc.edu:/work/revathy-lab/food-volume/data/checkpoints .
+scp -r source destination [let's you copy entire folder]
+
+
+to print in data.out
+import sys
+sys.stdout.flush()
+
+create a new env
+	conda create -name [env]
+
+install git
+	conda install -c anaconda git
+	
+
+install pytorch torchvision
+	conda install pytorch torchvision torchaudio cudatoolkit=10.1 -c pytorch
+
+install tensorflow
+	conda install -c conda-forge tensorflow==2.10.0
+
+
+*************************************how to set up conda environment with gpu in cluster:***************************************
+go to -> https://login002.rc.sc.edu
+create a hyperion desktop > get a gpu node
+module load cuda/11.3
+module load python3/anaconda/2021.11
+create a new conda env with python
+activate the env
+pip install torch==1.12.0+cu113 torchvision==0.13.0+cu113 torchaudio==0.12.0 --extra-index-url https://download.pytorch.org/whl/cu113
+python
+>>>import torch
+>>>cuda.torch.is_available()
+True
+>>>cuda.torch.device_count()
+2
+>>>exit()
+****************************************************************************************************************************************
+

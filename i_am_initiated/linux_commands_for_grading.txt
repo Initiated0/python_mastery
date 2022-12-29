@@ -1,0 +1,43 @@
+sudo cpplint program1.cc
+
+sudo g++ program1.cc -o program1
+
+sudo python3 test_to_decimal.py 1
+
+sudo python3 instructor_tests1.py 1
+
+sudo rm program1*
+
+sudo make style-points
+
+sudo make grade compile + operator_funcitons 
+
+
+
+copy operator_functions.h operator_functions.cc and program2.cc into the directory
+
+make style-points (for 1 point)
+Documentation (for 1 point)
+
+#make grade does the following
+make program2     (for 1 point) compile check
+make isinteger  
+./isinteger     (for 1 point)
+make isarithmetic
+./isarithmetic  (for 1 point)
+make optowords
+./optowords   (for 1 point)
+
+
+make compute
+./compute   (for 2 points)
+
+python3 test_program2.py  (for 2 points)
+
+make clean
+
+
+
+sudo make style-points
+sudo make grade
+sudo python3 test_program2.py
